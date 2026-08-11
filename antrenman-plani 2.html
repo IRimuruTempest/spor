@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Yük Defteri">
+<title>67 → 95 · 5 Yıllık Yük Defteri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15191C;
+  --ink-2:#3E464C;
+  --ink-3:#767F86;
+  --paper:#E9ECE7;
+  --paper-2:#F3F5F1;
+  --line:rgba(21,25,28,.12);
+  --grid:rgba(21,25,28,.055);
+
+  /* IWF kalibre plaka renkleri — fazların kimliği */
+  --p1:#00843D; /* 10 kg  yeşil  */
+  --p2:#FFD100; /* 15 kg  sarı   */
+  --p3:#0057B8; /* 20 kg  mavi   */
+  --p4:#C8102E; /* 25 kg  kırmızı*/
+
+  --display:'Archivo Black',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---------- hero ---------- */
+header{padding:56px 0 0}
+.kicker{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:26px}
+.tag{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;border:1px solid var(--line);padding:5px 10px;color:var(--ink-2);
+  background:var(--paper-2)}
+h1{font-family:var(--display);font-size:clamp(46px,12vw,104px);
+  line-height:.86;letter-spacing:-.03em;text-transform:uppercase}
+h1 .arrow{color:var(--ink-3)}
+.subline{margin-top:22px;max-width:52ch;font-size:17px;color:var(--ink-2)}
+.subline b{color:var(--ink);font-weight:600}
+
+/* ---------- signature: bar ---------- */
+.barbell{margin:46px 0 10px}
+.bar-track{position:relative;height:150px;display:flex;align-items:center}
+.sleeve{position:absolute;left:0;right:0;top:50%;height:9px;transform:translateY(-50%);
+  background:linear-gradient(180deg,#B9BEC2,#7C8489 42%,#5A6165 60%,#9AA1A6);
+  border-radius:2px}
+.plates{position:relative;display:flex;justify-content:space-between;width:100%;gap:6px}
+.plate{flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-family:var(--mono);color:var(--ink-2);text-decoration:none}
+.plate .disc{width:100%;max-width:96px;height:120px;border-radius:7px;
+  border:3px solid var(--ink);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:2px;
+  transition:transform .22s cubic-bezier(.2,.8,.3,1),box-shadow .22s;
+  box-shadow:3px 3px 0 var(--ink)}
+.plate:hover .disc,.plate:focus-visible .disc{transform:translate(-2px,-3px);box-shadow:5px 6px 0 var(--ink)}
+.plate:focus-visible{outline:2px solid var(--ink);outline-offset:6px}
+.disc .yr{font-family:var(--display);font-size:26px;line-height:1;color:var(--ink)}
+.disc .kg{font-size:11px;font-weight:600;letter-spacing:.08em;color:rgba(21,25,28,.72)}
+.plate .cap{font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+.p-1 .disc{background:var(--p1)} .p-1 .disc .yr,.p-1 .disc .kg{color:#fff}
+.p-2 .disc{background:var(--p2)}
+.p-3 .disc{background:var(--p3)} .p-3 .disc .yr,.p-3 .disc .kg{color:#fff}
+.p-4 .disc{background:var(--p4)} .p-4 .disc .yr,.p-4 .disc .kg{color:#fff}
+.p-5 .disc{background:#E8EAEC}
+
+/* ---------- bölümler ---------- */
+section{padding:64px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+.sec-head h2{font-family:var(--display);font-size:clamp(26px,5vw,40px);
+  text-transform:uppercase;letter-spacing:-.02em;line-height:1}
+.sec-note{max-width:60ch;color:var(--ink-2);margin-bottom:32px;font-size:15px}
+
+/* ---------- yasalar ---------- */
+.laws{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.law{background:var(--paper-2);padding:22px}
+.law h3{font-size:15px;font-weight:700;margin-bottom:7px}
+.law p{font-size:14px;color:var(--ink-2)}
+.law .lnum{font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  letter-spacing:.14em;display:block;margin-bottom:12px}
+
+/* ---------- faz kartları ---------- */
+.phase{border:2px solid var(--ink);background:var(--paper-2);margin-bottom:22px;box-shadow:4px 4px 0 var(--ink)}
+.phase-top{display:flex;align-items:stretch;border-bottom:2px solid var(--ink)}
+.phase-band{width:14px;flex:none}
+.ph1 .phase-band{background:var(--p1)}
+.ph2 .phase-band{background:var(--p2)}
+.ph3 .phase-band{background:var(--p3)}
+.ph4 .phase-band{background:var(--p4)}
+.phase-id{padding:18px 20px;flex:1;display:flex;flex-wrap:wrap;gap:6px 24px;align-items:baseline}
+.phase-id h3{font-family:var(--display);font-size:20px;text-transform:uppercase;letter-spacing:-.01em}
+.phase-meta{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+.phase-meta span b{color:var(--ink);font-weight:600}
+.phase-body{padding:20px}
+.goal{font-size:15px;color:var(--ink-2);margin-bottom:20px;max-width:66ch}
+.goal b{color:var(--ink);font-weight:600}
+
+/* ---------- akordiyon (JavaScript'siz çalışır) ---------- */
+.acc{border:1.5px solid var(--ink);background:var(--paper);margin-bottom:10px}
+.acc summary{
+  list-style:none;cursor:pointer;padding:14px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  font-family:var(--mono);font-size:12px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::marker{content:""}
+.acc summary .sign{font-family:var(--display);font-size:17px;line-height:1;flex:none}
+.acc summary .sign::after{content:"+"}
+.acc[open] summary .sign::after{content:"–"}
+.acc[open] summary{background:var(--ink);color:var(--paper);}
+.acc summary:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.acc-body{padding:16px}
+
+/* ---------- tablolar ---------- */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:400px}
+th{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);text-align:left;padding:8px 12px 8px 0;border-bottom:1.5px solid var(--ink);white-space:nowrap}
+td{padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.lift{font-weight:600}
+.hint{display:block;font-size:12px;color:var(--ink-3);margin-top:2px;font-weight:400}
+
+/* ---------- hesaplayıcılar ---------- */
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.tool{border:2px solid var(--ink);background:var(--paper-2);padding:22px;box-shadow:4px 4px 0 var(--ink)}
+.tool h3{font-family:var(--display);font-size:17px;text-transform:uppercase;margin-bottom:4px}
+.tool .th{font-size:13px;color:var(--ink-3);margin-bottom:18px}
+.field{margin-bottom:14px}
+.field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.field input,.field select{width:100%;padding:11px 12px;border:1.5px solid var(--ink);
+  background:var(--paper);font-family:var(--mono);font-size:16px;color:var(--ink);border-radius:0;-webkit-appearance:none;appearance:none}
+.field select{background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);
+  background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.field input:focus,.field select:focus{outline:2px solid var(--ink);outline-offset:1px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.out{margin-top:18px;border-top:1.5px solid var(--ink);padding-top:16px}
+.out-big{font-family:var(--display);font-size:38px;line-height:1;letter-spacing:-.02em}
+.out-big small{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.1em;color:var(--ink-3);margin-left:6px}
+.macros{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.macro{border:1px solid var(--line);padding:10px;background:var(--paper)}
+.macro span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.macro b{font-family:var(--mono);font-size:18px;font-weight:600}
+.setlist{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.setrow{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:13px;
+  border-bottom:1px dotted var(--line);padding-bottom:5px}
+.setrow em{font-style:normal;color:var(--ink-3);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.nojs{display:none;font-size:13px;color:var(--ink-2);border-left:3px solid var(--p4);padding-left:12px;margin-top:14px}
+
+/* ---------- supplement ---------- */
+.supp{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);margin-bottom:26px}
+.s-item{background:var(--paper-2);padding:18px}
+.s-item h4{font-size:15px;font-weight:700;display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.dot{width:9px;height:9px;flex:none;border:1.5px solid var(--ink)}
+.d-core{background:var(--p4)} .d-opt{background:var(--p2)}
+.s-dose{font-family:var(--mono);font-size:12px;color:var(--ink);margin-bottom:7px}
+.s-item p{font-size:13px;color:var(--ink-2)}
+.avoid{border:2px solid var(--ink);padding:18px 20px;background:var(--paper-2)}
+.avoid h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.avoid p{font-size:14px;color:var(--ink-2)}
+.avoid code{font-family:var(--mono);font-size:13px;background:rgba(200,16,46,.1);padding:1px 5px}
+
+/* ---------- takip ---------- */
+.track{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.t-col{background:var(--paper-2);padding:20px}
+.t-col h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+.t-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.t-col li{font-size:14px;padding-left:18px;position:relative;color:var(--ink-2)}
+.t-col li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border:1.5px solid var(--ink)}
+
+.callout{border-left:4px solid var(--ink);padding:14px 0 14px 18px;margin:24px 0;font-size:15px;color:var(--ink-2);max-width:66ch}
+.callout b{color:var(--ink)}
+
+footer{padding:44px 0 64px;border-top:1px solid var(--line);color:var(--ink-3);font-size:13px}
+footer p{max-width:64ch}
+
+@media(max-width:640px){
+  header{padding-top:36px}
+  section{padding:44px 0}
+  .bar-track{height:118px}
+  .plate .disc{height:88px;border-width:2px;box-shadow:2px 2px 0 var(--ink)}
+  .disc .yr{font-size:17px}
+  .disc .kg{font-size:9px}
+  .plate .cap{display:none}
+  .plates{gap:3px}
+  .phase{box-shadow:3px 3px 0 var(--ink)}
+  .phase-body{padding:14px}
+  .acc-body{padding:14px 12px}
+  .macros{gap:6px}
+  .macro b{font-size:15px}
+  .row2{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <div class="kicker">
+    <span class="tag">Natural</span>
+    <span class="tag">60 Ay</span>
+    <span class="tag">1.86 m</span>
+    <span class="tag">Barbell Temelli</span>
+  </div>
+  <h1>67 <span class="arrow">→</span><br>95 KG</h1>
+  <p class="subline">Beş yıla yayılmış, dört fazlı yük programı. Her faz bir öncekinin tavanı geldiğinde başlar — takvimle değil, <b>bara koyabildiğin ağırlıkla</b>.</p>
+
+  <nav class="barbell" aria-label="Yıllara git">
+    <div class="bar-track">
+      <div class="sleeve" aria-hidden="true"></div>
+      <div class="plates">
+        <a class="plate p-1" href="#faz1"><span class="disc"><span class="yr">Y1</span><span class="kg">79 KG</span></span><span class="cap">Temel</span></a>
+        <a class="plate p-2" href="#faz2"><span class="disc"><span class="yr">Y2</span><span class="kg">86 KG</span></span><span class="cap">Hacim</span></a>
+        <a class="plate p-3" href="#faz3"><span class="disc"><span class="yr">Y3</span><span class="kg">91 KG</span></span><span class="cap">Yoğunluk</span></a>
+        <a class="plate p-4" href="#faz4"><span class="disc"><span class="yr">Y4</span><span class="kg">94 KG</span></span><span class="cap">Uzmanlaşma</span></a>
+        <a class="plate p-5" href="#takip"><span class="disc"><span class="yr">Y5</span><span class="kg">95 KG</span></span><span class="cap">Kalite</span></a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ SİSTEM ============ -->
+<section id="sistem">
+  <div class="sec-head"><span class="eyebrow">Sistem</span><h2>Üç Yasa</h2></div>
+  <p class="sec-note">Programın geri kalanı bu üçünün uygulama detayıdır. Biri çökerse diğer ikisi seni kurtarmaz.</p>
+  <div class="laws">
+    <div class="law"><span class="lnum">01</span><h3>Aşırı yük</h3><p>Haftalık toplam iş artmalı: ağırlık, tekrar veya set. Üçü de sabitse kas büyümesi durur — program ne kadar iyi olursa olsun.</p></div>
+    <div class="law"><span class="lnum">02</span><h3>Kalori fazlası</h3><p>+28 kg'ın yaklaşık 21'i kas, 7'si yağ ve su. Fazla olmadan kas sentezi için hammadde yok. En kırılgan halkan bu.</p></div>
+    <div class="law"><span class="lnum">03</span><h3>Toparlanma</h3><p>Uyarı salonda verilir, adaptasyon uykuda olur. 7 saatin altındaki haftalarda hacmi düşür — zorlama, sakatlık getirir.</p></div>
+  </div>
+
+  <div class="callout"><b>Efor ölçeği (RIR).</b> Setler artık ağırlıkla değil, <b>tankta kalan tekrarla</b> tanımlı. Ana kaldırışlarda RIR 2 (setin sonunda 2 tekrar daha yapabilecek durumda ol), izolasyonda RIR 1, teknik öğrenirken RIR 4. RIR 0 yalnızca yılda 1–2 test setinde.</div>
+</section>
+
+<!-- ============ FAZLAR ============ -->
+<section id="fazlar">
+  <div class="sec-head"><span class="eyebrow">Program</span><h2>Dört Faz</h2></div>
+  <p class="sec-note">Faza takvimle değil, <b>durma sinyaliyle</b> geçilir. Her fazın geçiş koşulu kartında yazıyor. Başlıklara dokunarak aç-kapat.</p>
+
+  <!-- FAZ 1 -->
+  <article class="phase ph1" id="faz1">
+    <div class="phase-top">
+      <div class="phase-band"></div>
+      <div class="phase-id">
+        <h3>Faz 1 · Temel</h3>
+        <div class="phase-meta">
+          <span>AY <b>0–9</b></span><span>HAFTADA <b>3 GÜN</b></span><span>FULL BODY A/B</span><span>LİNEER</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <p class="goal"><b>Amaç:</b> Barbell tekniğini oturtmak ve sinir sistemini uyandırmak. Bu fazda kaslar değil, <b>hareket kalıpları</b> inşa ediliyor. Boş barla (20 kg) başla; ilk ay içinde en az 2 seans antrenörle teknik çalış — planın en yüksek getirili yatırımı bu.</p>
+
+      <details class="acc" open>
+        <summary>Gün A<span class="sign"></span></summary>
+        <div class="acc-body"><div class="tbl-scroll"><table>
+          <thead><tr><th>Hareket</th><th>Set × Tekrar</th><th>RIR</th><th>Dinlenme</th></tr></thead>
+          <tbody>
+            <tr><td class="lift">Back Squat</td><td class="n">3 × 5</td><td class="n">3</td><td class="n">3 dk</td></tr>
+            <tr><td class="lift">Bench Press</td><td class="n">3 × 5</td><td class="n">3</td><td class="n">3 dk</td></tr>
+            <tr><td class="lift">Barbell Row</td><td class="n">3 × 8</td><td class="n">2</td><td class="n">2 dk</td></tr>
+            <tr><td class="lift">Lat Pulldown</td><td class="n">3 × 10</td><td class="n">1</td><td class="n">90 sn</td></tr>
+            <tr><td class="lift">Overhead Triceps Ext.</td><td class="n">2 × 12</td><td class="n">1</td><td class="n">60 sn</td></tr>
+            <tr><td class="lift">Plank</td><td class="n">3 × 45 sn</td><td class="n">—</td><td class="n">45 sn</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+
+      <details class="acc">
+        <summary>Gün B<span class="sign"></span></summary>
+        <div class="acc-body"><div class="tbl-scroll"><table>
+          <thead><tr><th>Hareket</th><th>Set × Tekrar</th><th>RIR</th><th>Dinlenme</th></tr></thead>
+          <tbody>
+            <tr><td class="lift">Deadlift</td><td class="n">2 × 5</td><td class="n">3</td><td class="n">4 dk</td></tr>
+            <tr><td class="lift">Overhead Press</td><td class="n">3 × 5</td><td class="n">3</td><td class="n">3 dk</td></tr>
+            <tr><td class="lift">Pull-up <span class="hint">Yardımlı başlayabilirsin</span></td><td class="n">3 × 6–8</td><td class="n">1</td><td class="n">2 dk</td></tr>
+            <tr><td class="lift">Leg Press</td><td class="n">3 × 10</td><td class="n">2</td><td class="n">2 dk</td></tr>
+            <tr><td class="lift">Barbell Curl</td><td class="n">2 × 12</td><td class="n">1</td><td class="n">60 sn</td></tr>
+            <tr><td class="lift">Face Pull</td><td class="n">3 × 15</td><td class="n">2</td><td class="n">60 sn</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+
+      <details class="acc">
+        <summary>Progresyon kuralları<span class="sign"></span></summary>
+        <div class="acc-body"><div class="tbl-scroll"><table>
+          <thead><tr><th>Kural</th><th>Uygulama</th></tr></thead>
+          <tbody>
+            <tr><td class="lift">Hafta düzeni</td><td>A–B–A / B–A–B dönüşümlü. Aralarda 1 gün boşluk.</td></tr>
+            <tr><td class="lift">Yük artışı</td><td><span class="num">+2.5 kg</span> her seans (Squat, Bench, Row, OHP) · <span class="num">+5 kg</span> Deadlift, ilk 4 ay</td></tr>
+            <tr><td class="lift">Takılınca</td><td>Aynı ağırlıkta tekrar dene. <b>3 üst üste başarısızlık</b> → ağırlığı %10 düşür, yeniden tırman.</td></tr>
+            <tr><td class="lift">Isınma</td><td>5 dk genel + bar×10, %40×5, %60×3, %80×1 → çalışma setleri</td></tr>
+            <tr><td class="lift">Deload</td><td>8 haftada bir: yük %55, set sayısı yarı</td></tr>
+            <tr><td class="lift">Faz 2'ye geçiş</td><td>Squat'ta <b>2 kez reset</b> attıysan ve hâlâ ilerlemiyorsan lineer progresyon bitmiştir.</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+    </div>
+  </article>
+
+  <!-- FAZ 2 -->
+  <article class="phase ph2" id="faz2">
+    <div class="phase-top">
+      <div class="phase-band"></div>
+      <div class="phase-id">
+        <h3>Faz 2 · Hacim</h3>
+        <div class="phase-meta">
+          <span>AY <b>9–24</b></span><span>HAFTADA <b>4 GÜN</b></span><span>UPPER / LOWER</span><span>ÇİFT PROGRESYON</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <p class="goal"><b>Amaç:</b> Her seans ağırlık ekleme dönemi bitti. Artık büyüme <b>haftalık set hacminden</b> geliyor. Kilonun en hızlı arttığı ve fiziğin gerçekten değiştiği faz burası.</p>
+
+      <details class="acc" open>
+        <summary>Upper A · güç<span class="sign"></span></summary>
+        <div class="acc-body"><div class="tbl-scroll"><table>
+          <thead><tr><th>Hareket</th><th>Set × Tekrar</th><th>RIR</th></tr></thead>
+          <tbody>
+            <tr><td class="lift">Bench Press</td><td class="n">4 × 5</td><td class="n">2</td></tr>
+            <tr><td class="lift">Barbell Row</td><td class="n">4 × 6</td><td class="n">2</td></tr>
+            <tr><td class="lift">Overhead Press</td><td class="n">3 × 8</td><td class="n">2</td></tr>
+            <tr><td class="lift">Ağırlıklı Pull-up</td><td class="n">3 × 8</td><td class="n">1</td></tr>
+            <tr><td class="lift">Incline Dumbbell Press</td><td class="n">3 × 10</td><td class="n">1</td></tr>
+            <tr><td class="lift">Barbell Curl</td><td class="n">3 × 10</td><td class="n">1</td></tr>
+            <tr><td class="lift">Overhead Triceps Ext.</td><td class="n">3 × 12</td><td class="n">1</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+
+      <details class="acc">
+        <summary>Lower A · güç<span class="sign"></span></summary>
+        <div class="acc-body"><div class="tbl-scroll"><table>
+          <thead><tr><th>Hareket</th><th>Set × Tekrar</th><th>RIR</th></tr></thead>
+          <tbody>
+            <tr><td class="lift">Back Squat</td><td class="n">4 × 5</td><td class="n">2</td></tr>
+            <tr><td class="lift">Romanian Deadlift</td><td class="n">3 × 8</td><td class="n">2</td></tr>
+            <tr><td class="lift">Leg Press</td><td class="n">3 × 12</td><td class="n">1</td></tr>
+            <tr><td class="lift">Leg Curl</td><td class="n">3 × 12</td><td class="n">1</td></tr>
+            <tr><td class="lift">Standing Calf Raise</td><td class="n">4 × 15</td><td class="n">1</td></tr>
+            <tr><td class="lift">Hanging Leg Raise</td><td class="n">3 × 12</td><td class="n">1</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+
+      <details class="acc">
+        <summary>Upper B · hipertrofi<span class="sign"></span></summary>
+        <div class="acc-body"><div class="tbl-scroll"><table>
+          <thead><tr><th>Hareket</th><th>Set × Tekrar</th><th>RIR</th></tr></thead>
+          <tbody>
+            <tr><td class="lift">Incline Barbell Press</td><td class="n">4 × 8</td><td class="n">2</td></tr>
+            <tr><td class="lift">Lat Pulldown <span class="hint">geniş tutuş</span></td><td class="n">4 × 10</td><td class="n">1</td></tr>
+            <tr><td class="lift">Seated Dumbbell Press</td><td class="n">3 × 10</td><td class="n">1</td></tr>
+            <tr><td class="lift">Chest-Supported Row</td><td class="n">3 × 12</td><td class="n">1</td></tr>
+            <tr><td class="lift">Lateral Raise</td><td class="n">4 × 15</td><td class="n">0–1</td></tr>
+            <tr><td class="lift">Cable Fly</td><td class="n">3 × 15</td><td class="n">1</td></tr>
+            <tr><td class="lift">Hammer Curl</td><td class="n">3 × 12</td><td class="n">1</td></tr>
+            <tr><td class="lift">Rope Pushdown</td><td class="n">3 × 15</td><td class="n">1</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+
+      <details class="acc">
+        <summary>Lower B · hipertrofi<span class="sign"></span></summary>
+        <div class="acc-body"><div class="tbl-scroll"><table>
+          <thead><tr><th>Hareket</th><th>Set × Tekrar</th><th>RIR</th></tr></thead>
+          <tbody>
+            <tr><td class="lift">Deadlift</td><td class="n">3 × 5</td><td class="n">2</td></tr>
+            <tr><td class="lift">Front Squat <span class="hint">veya Hack Squat</span></td><td class="n">3 × 8</td><td class="n">2</td></tr>
+            <tr><td class="lift">Bulgarian Split Squat</td><td class="n">3 × 10 / bacak</td><td class="n">1</td></tr>
+            <tr><td class="lift">Leg Extension</td><td class="n">3 × 15</td><td class="n">1</td></tr>
+            <tr><td class="lift">Seated Calf Raise</td><td class="n">4 × 20</td><td class="n">1</td></tr>
+            <tr><td class="lift">Cable Crunch</td><td class="n">3 × 15</td><td class="n">1</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+
+      <details class="acc">
+        <summary>Progresyon kuralları<span class="sign"></span></summary>
+        <div class="acc-body"><div class="tbl-scroll"><table>
+          <thead><tr><th>Kural</th><th>Uygulama</th></tr></thead>
+          <tbody>
+            <tr><td class="lift">Hafta</td><td>Pzt Upper A · Sal Lower A · Çrş dinlenme · Prş Upper B · Cum Lower B</td></tr>
+            <tr><td class="lift">Çift progresyon</td><td>Tüm setlerde hedef tekrarın üst sınırına ulaş → <span class="num">+2.5 kg</span> ekle, alt sınıra dön.<span class="hint">Örnek: 70 kg × 5/5/4/4 → devam. 70 × 5/5/5/5 → 72.5 kg'a çık.</span></td></tr>
+            <tr><td class="lift">Deload</td><td>6–8 haftada bir: yük %55, set sayısı yarı, hareketler aynı</td></tr>
+            <tr><td class="lift">Faz 3'e geçiş</td><td>Bu yapıda <b>8 hafta boyunca</b> hiçbir ana kaldırışta ilerleme yoksa</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+    </div>
+  </article>
+
+  <!-- FAZ 3 -->
+  <article class="phase ph3" id="faz3">
+    <div class="phase-top">
+      <div class="phase-band"></div>
+      <div class="phase-id">
+        <h3>Faz 3 · Yoğunluk</h3>
+        <div class="phase-meta">
+          <span>AY <b>24–42</b></span><span>HAFTADA <b>5 GÜN</b></span><span>PPL + UPPER/LOWER</span><span>BLOK PERİYODİZASYON</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <p class="goal"><b>Amaç:</b> Tek bir progresyon modeli artık yetmiyor. Yılı <b>bloklara</b> bölüyorsun: hipertrofi bloğunda kas büyür, güç bloğunda o kası kullanmayı öğrenirsin. Dönüşümlü olmadan biri tek başına tavan yapar.</p>
+
+      <details class="acc" open>
+        <summary>Blok yapısı<span class="sign"></span></summary>
+        <div class="acc-body">
+          <div class="tbl-scroll"><table>
+            <thead><tr><th>Blok</th><th>Süre</th><th>Tekrar</th><th>Yük</th><th>Set / kas / hafta</th></tr></thead>
+            <tbody>
+              <tr><td class="lift">Hipertrofi</td><td class="n">8 hafta</td><td class="n">8–15</td><td class="n">%60–75</td><td class="n">16–22</td></tr>
+              <tr><td class="lift">Güç</td><td class="n">6 hafta</td><td class="n">3–6</td><td class="n">%80–90</td><td class="n">10–14</td></tr>
+              <tr><td class="lift">Deload</td><td class="n">1 hafta</td><td class="n">8–10</td><td class="n">%55</td><td class="n">6–8</td></tr>
+            </tbody>
+          </table></div>
+          <div class="callout" style="margin-bottom:0">Bu 15 haftalık döngüyü yıl boyunca tekrarla. Ana kaldırışlar her blokta kalır; değişen <b>tekrar aralığı, yük ve toplam hacim</b>.</div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Haftalık bölünme<span class="sign"></span></summary>
+        <div class="acc-body"><div class="tbl-scroll"><table>
+          <thead><tr><th>Gün</th><th>Ana kaldırış</th><th>Destek</th></tr></thead>
+          <tbody>
+            <tr><td class="lift">Push</td><td>Bench Press</td><td>Overhead Press · Incline DB Press · Lateral Raise · Cable Fly · Triceps ×2</td></tr>
+            <tr><td class="lift">Pull</td><td>Barbell Row</td><td>Ağırlıklı Pull-up · Chest-Supported Row · Lat Pulldown · Face Pull · Biceps ×2</td></tr>
+            <tr><td class="lift">Legs</td><td>Back Squat</td><td>Romanian Deadlift · Leg Press · Leg Curl · Calf · Karın</td></tr>
+            <tr><td class="lift">Upper</td><td>Overhead Press</td><td>Zayıf nokta odaklı — genelde yan omuz ve sırt kalınlığı</td></tr>
+            <tr><td class="lift">Lower</td><td>Deadlift</td><td>Front Squat · Hip Thrust · Bulgarian Split Squat · Leg Extension · Calf</td></tr>
+          </tbody>
+        </table></div></div>
+      </details>
+
+      <details class="acc">
+        <summary>Hacim hedefleri<span class="sign"></span></summary>
+        <div class="acc-body">
+          <p class="goal">Hacmi artık hareketle değil, <b>kas grubu başına haftalık set sayısıyla</b> planlıyorsun. Powerlifter olmayacağın için görsel öncelikli kaslar üst banda çekildi.</p>
+          <div class="tbl-scroll"><table>
+            <thead><tr><th>Kas grubu</th><th>Set / hafta</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td class="lift">Yan omuz</td><td class="n">14–20</td><td>Omuz genişliği, V şeklinin tek belirleyicisi. En yüksek öncelik.</td></tr>
+              <tr><td class="lift">Sırt <span class="hint">kalınlık + genişlik</span></td><td class="n">16–22</td><td>Yatay ve dikey çekiş dengeli bölünsün</td></tr>
+              <tr><td class="lift">Göğüs</td><td class="n">12–18</td><td>Uzun kol = uzun hareket yolu; eğimli çalışmaya ağırlık ver</td></tr>
+              <tr><td class="lift">Quadriceps</td><td class="n">12–18</td><td></td></tr>
+              <tr><td class="lift">Hamstring / kalça</td><td class="n">10–14</td><td></td></tr>
+              <tr><td class="lift">Biceps</td><td class="n">12–16</td><td>Uzun kollarda hacim yavaş gelir — kesme</td></tr>
+              <tr><td class="lift">Triceps</td><td class="n">12–16</td><td>Kol çevresinin %60'ı burası</td></tr>
+              <tr><td class="lift">Baldır · ön kol · boyun</td><td class="n">8–12</td><td>Küçük ama görüntüyü tamamlayan detay</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- FAZ 4 -->
+  <article class="phase ph4" id="faz4">
+    <div class="phase-top">
+      <div class="phase-band"></div>
+      <div class="phase-id">
+        <h3>Faz 4 · Uzmanlaşma</h3>
+        <div class="phase-meta">
+          <span>AY <b>42–60</b></span><span>HAFTADA <b>5–6 GÜN</b></span><span>PPL ×2</span><span>REKOMPOZİSYON</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <p class="goal"><b>Amaç:</b> Kilo artışı durur, <b>kompozisyon</b> devralır. Bakım kalorisinde kalıp kas kazanıp yağ kaybettiğin dönem. Son 3–4 kg burada kazanılır ve fiziği "tamamlanmış" gösteren şey bu kg'lardır.</p>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Araç</th><th>Uygulama</th></tr></thead>
+        <tbody>
+          <tr><td class="lift">Specialization bloğu</td><td>8 hafta boyunca <b>tek</b> geri kalmış kas grubuna çift hacim, geri kalanına bakım hacmi (haftada 6–8 set). Yılda 2 blok, farklı kaslara.</td></tr>
+          <tr><td class="lift">Mini-cut</td><td>Yağ oranı %18'i geçince: 6–8 hafta, bakım <span class="num">−500 kcal</span>, protein <span class="num">2.4 g/kg</span>, ağırlıklar sabit, hacim %20 aşağı. Hedef haftada <span class="num">0.5 kg</span>. Yılda en fazla 2 kez.</td></tr>
+          <tr><td class="lift">Test haftası</td><td>Yılda 1 kez, deload sonrası. Ana 4 kaldırışta tek tekrar maksimum. Amaç rekor değil, <b>haritayı güncellemek</b>.</td></tr>
+          <tr><td class="lift">Zayıf halka denetimi</td><td>6 ayda bir fotoğraf karşılaştırması. En geride kalan iki bölge sonraki specialization bloklarının konusudur.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ BESLENME ============ -->
+<section id="beslenme">
+  <div class="sec-head"><span class="eyebrow">Yakıt</span><h2>Beslenme</h2></div>
+  <p class="sec-note">Tablodaki sayılar başlangıç noktasıdır. <b>Gerçek ayar tartıdan gelir</b> — her sabah aç karnına tart, haftalık ortalamayı al, günlük dalgalanmayı yok say.</p>
+
+  <div class="tools">
+    <div class="tool">
+      <h3>Kalori hesaplayıcı</h3>
+      <p class="th">Bulunduğun kiloya göre günlük hedef.</p>
+      <div class="row2">
+        <div class="field"><label for="kg">Kilo (kg)</label><input id="kg" type="number" value="67" min="45" max="140" step="0.5" inputmode="decimal"></div>
+        <div class="field"><label for="yas">Yaş</label><input id="yas" type="number" value="22" min="16" max="60" inputmode="numeric"></div>
+      </div>
+      <div class="field"><label for="akt">Günlük aktivite</label>
+        <select id="akt">
+          <option value="1.45">Masa başı + antrenman</option>
+          <option value="1.6" selected>Ayakta / staj + antrenman</option>
+          <option value="1.75">Çok hareketli / vardiya</option>
+        </select>
+      </div>
+      <div class="field"><label for="hedef">Dönem</label>
+        <select id="hedef">
+          <option value="400">Bulk — agresif (Yıl 1)</option>
+          <option value="250">Bulk — kontrollü (Yıl 2–3)</option>
+          <option value="120">Bulk — yavaş (Yıl 4–5)</option>
+          <option value="0">Bakım</option>
+          <option value="-500">Mini-cut</option>
+        </select>
+      </div>
+      <div class="out">
+        <div class="out-big"><span id="kcal">3200</span><small>KCAL / GÜN</small></div>
+        <div class="macros">
+          <div class="macro"><span>Protein</span><b id="pro">134 g</b></div>
+          <div class="macro"><span>Yağ</span><b id="yag">89 g</b></div>
+          <div class="macro"><span>Karbonhidrat</span><b id="karb">466 g</b></div>
+        </div>
+        <p class="th" style="margin-top:14px" id="rate">67 kg için: haftada +0.25–0.35 kg beklenir.</p>
+        <p class="nojs" id="nojs1">Hesaplayıcı için bu dosyayı Safari'de aç — önizleme penceresi JavaScript çalıştırmıyor. Aşağıdaki tablo her koşulda geçerli.</p>
+      </div>
+    </div>
+
+    <div class="tool">
+      <h3>Yük hesaplayıcı</h3>
+      <p class="th">Bir setten tahmini 1RM ve çalışma ağırlıkları.</p>
+      <div class="row2">
+        <div class="field"><label for="w">Ağırlık (kg)</label><input id="w" type="number" value="60" min="20" max="300" step="2.5" inputmode="decimal"></div>
+        <div class="field"><label for="r">Tekrar</label><input id="r" type="number" value="5" min="1" max="12" inputmode="numeric"></div>
+      </div>
+      <div class="out">
+        <div class="out-big"><span id="orm">70</span><small>KG · TAHMİNİ 1RM</small></div>
+        <div class="setlist">
+          <div class="setrow"><em>Güç bloğu · %85</em><span id="s85">60 kg</span></div>
+          <div class="setrow"><em>Ana set · %80</em><span id="s80">55 kg</span></div>
+          <div class="setrow"><em>Hipertrofi · %70</em><span id="s70">50 kg</span></div>
+          <div class="setrow"><em>Isınma · %60</em><span id="s60">42.5 kg</span></div>
+          <div class="setrow"><em>Deload · %55</em><span id="s55">37.5 kg</span></div>
+        </div>
+        <p class="nojs" id="nojs2">Hesaplayıcı için Safari'de aç. Formül: <b>1RM = ağırlık × (1 + tekrar ÷ 30)</b> — elde de hesaplayabilirsin.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:34px" class="tbl-scroll"><table>
+    <thead><tr><th>Dönem</th><th>Kilo</th><th>Kalori</th><th>Protein</th><th>Hedef artış</th></tr></thead>
+    <tbody>
+      <tr><td class="lift">Ay 0–12</td><td class="n">67 → 79</td><td class="n">3200 → 3350</td><td class="n">140–155 g</td><td class="n">+0.25 kg / hafta</td></tr>
+      <tr><td class="lift">Yıl 2</td><td class="n">79 → 86</td><td class="n">3500</td><td class="n">170 g</td><td class="n">+0.15 kg / hafta</td></tr>
+      <tr><td class="lift">Yıl 3</td><td class="n">86 → 91</td><td class="n">3600</td><td class="n">180 g</td><td class="n">+0.10 kg / hafta</td></tr>
+      <tr><td class="lift">Yıl 4</td><td class="n">91 → 94</td><td class="n">3650</td><td class="n">185 g</td><td class="n">+0.05 kg / hafta</td></tr>
+      <tr><td class="lift">Yıl 5</td><td class="n">94 → 96</td><td class="n">3400–3700</td><td class="n">190 g</td><td class="n">Rekompozisyon</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout"><b>Ayar protokolü.</b> 2 hafta üst üste ortalama artmıyorsa <span class="num">+200 kcal</span>. Hedeflenen hızın iki katı artıyorsa <span class="num">−200 kcal</span>. Bel çevresi kiloyla orantısız artıyorsa fazla yağ alıyorsun demektir.</div>
+
+  <div class="callout"><b>Pratik.</b> 67 kg'daysan doğal olarak az yiyen birisin; katı gıdayla 3200 kcal zor. Günde bir <b>sıvı öğün</b> (500 ml süt + 80 g yulaf + muz + 2 kaşık fıstık ezmesi ≈ 800 kcal) bu açığı tek başına kapatır. İlk 3 ay kaloriyi uygulamayla say — sonra göz kararı yeter, tartı takılırsa saymaya geri dön.</div>
+</section>
+
+<!-- ============ SUPPLEMENT ============ -->
+<section id="supplement">
+  <div class="sec-head"><span class="eyebrow">Destek</span><h2>Supplement</h2></div>
+  <p class="sec-note">Natural kalacaksan liste kısadır. Aşağıdakiler dışındaki her şey ya kanıtsız ya da yemekten gelmesi gereken şeyin pahalı hali.</p>
+
+  <div class="supp">
+    <div class="s-item"><h4><span class="dot d-core"></span>Kreatin monohidrat</h4><p class="s-dose">5 g / gün · her gün</p><p>En çok araştırılmış yasal supplement. Güç ve kas kütlesinde ölçülebilir fark. Yükleme dönemine gerek yok, antrenman yapmadığın günlerde de al.</p></div>
+    <div class="s-item"><h4><span class="dot d-core"></span>Whey protein</h4><p class="s-dose">1–2 ölçek · gerektiğinde</p><p>Gıda değil, kolaylık. Protein hedefini yemekle tutturabildiğin günlerde alma.</p></div>
+    <div class="s-item"><h4><span class="dot d-core"></span>D vitamini</h4><p class="s-dose">1000–2000 IU · kış aylarında</p><p>Kapalı ortamda çok vakit geçiriyorsun, eksiklik yaygın. En doğrusu kan testiyle doz ayarlamak.</p></div>
+    <div class="s-item"><h4><span class="dot d-core"></span>Kafein</h4><p class="s-dose">200–400 mg · antrenmandan 40 dk önce</p><p>Performansta ölçülebilir artış. Her antrenmanda değil, sadece ağır günlerde — tolerans gelişmesin.</p></div>
+    <div class="s-item"><h4><span class="dot d-opt"></span>Omega-3</h4><p class="s-dose">1–2 g EPA/DHA</p><p>Haftada 2 kez balık yiyorsan gereksiz. Eklem ve genel sağlık.</p></div>
+    <div class="s-item"><h4><span class="dot d-opt"></span>Magnezyum</h4><p class="s-dose">300–400 mg · akşam</p><p>Uyku kalitesi ve kas krampları. Yoğun dönemlerde fark eder.</p></div>
+  </div>
+
+  <div class="avoid">
+    <h4>Almana gerek yok</h4>
+    <p>BCAA · glutamin · testosteron booster · mass gainer tozu (kendi shake'in yarı fiyatına iki kat kalite) · yağ yakıcı · kollajen · HMB · çoklu pre-workout karışımları</p>
+    <p style="margin-top:12px"><b>Kesinlikle uzak dur:</b> <code>SARM</code> <code>prohormon</code> <code>anabolik steroid</code> — natural kalma kararının arkasında dur. Bu yaşta doğal hormon üretimini kalıcı bozabilir; hemşirelik okuyorsun, karaciğer ve kardiyovasküler tabloyu zaten göreceksin.</p>
+  </div>
+</section>
+
+<!-- ============ TAKİP ============ -->
+<section id="takip">
+  <div class="sec-head"><span class="eyebrow">Kontrol</span><h2>Güç Haritası &amp; Takip</h2></div>
+  <p class="sec-note">Bu sayılar hedeftir, takvim değil. Bir yıl geride kalırsan plan bozulmaz — sıradaki fazın başlangıcı ötelenir.</p>
+
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Hareket · 1RM</th><th>Yıl 1</th><th>Yıl 2</th><th>Yıl 3</th><th>Yıl 4</th><th>Yıl 5</th></tr></thead>
+    <tbody>
+      <tr><td class="lift">Deadlift</td><td class="n">130</td><td class="n">160</td><td class="n">185</td><td class="n">205</td><td class="n">220 kg</td></tr>
+      <tr><td class="lift">Back Squat</td><td class="n">100</td><td class="n">130</td><td class="n">150</td><td class="n">165</td><td class="n">175 kg</td></tr>
+      <tr><td class="lift">Bench Press</td><td class="n">70</td><td class="n">90</td><td class="n">105</td><td class="n">115</td><td class="n">125 kg</td></tr>
+      <tr><td class="lift">Barbell Row</td><td class="n">70</td><td class="n">90</td><td class="n">105</td><td class="n">115</td><td class="n">122 kg</td></tr>
+      <tr><td class="lift">Overhead Press</td><td class="n">45</td><td class="n">55</td><td class="n">62</td><td class="n">70</td><td class="n">75 kg</td></tr>
+      <tr><td class="lift">Ağırlıklı Pull-up</td><td class="n">BW×8</td><td class="n">+15</td><td class="n">+25</td><td class="n">+35</td><td class="n">+45 kg</td></tr>
+    </tbody>
+  </table></div>
+
+  <div style="margin-top:34px" class="track">
+    <div class="t-col"><h4>Her antrenman</h4><ul><li>Hareket, ağırlık, set, tekrar — kaydet</li><li>Geçen haftayı hatırlamıyorsan progresyon yapamazsın</li></ul></div>
+    <div class="t-col"><h4>Haftalık</h4><ul><li>7 günlük tartı ortalaması</li><li>Kaçırılan antrenman sayısı</li></ul></div>
+    <div class="t-col"><h4>Aylık</h4><ul><li>Bel, göğüs, kol, uyluk, omuz ölçümü</li><li>Aynı poz ve ışıkta 3 fotoğraf</li></ul></div>
+    <div class="t-col"><h4>Yıllık</h4><ul><li>Ana kaldırışlarda 1RM testi</li><li>Kan: D vit, B12, ferritin, lipid, KCFT, testosteron</li></ul></div>
+  </div>
+
+  <div class="callout"><b>Bakım modu.</b> Staj, nöbet, sınav, taşınma — kesinti gelecek. Kural şu: <b>bırakma, küçült.</b> Haftada 2 gün, sadece ana hareketler, 2'şer set, kalori aynı. Bu seni geriye götürmez, sadece bekletir. Tamamen bırakmakla küçültmek arasındaki fark, 5 yılın sonunda 10 kg'dır.</div>
+</section>
+
+<footer>
+  <p><b>Gerçekçi beklenti.</b> 5 yıl sonunda 95 kg, %12–15 yağ oranı, geniş omuz, kalın sırt, 200+ kg deadlift. Anatoly'nin birebir kopyası değil — o 1.75 boyunda, senin 1.86'daki 95 kg'ın daha uzun ve atletik görünecek. Bu bir eksiklik değil, farklı bir iskelet.</p>
+  <p style="margin-top:14px">Bu sayfa genel eğitim amaçlıdır. Mevcut bir sağlık sorunun varsa veya antrenman sırasında keskin, tek noktada ağrı hissedersen programa devam etmeden önce hekime danış.</p>
+</footer>
+
+</div>
+
+<script>
+document.querySelectorAll('.nojs').forEach(function(el){ el.style.display='none'; });
+
+var BOY = 186;
+function hesaplaKalori(){
+  var kg = parseFloat(document.getElementById('kg').value) || 67;
+  var yas = parseFloat(document.getElementById('yas').value) || 22;
+  var akt = parseFloat(document.getElementById('akt').value);
+  var fazla = parseFloat(document.getElementById('hedef').value);
+
+  var bmr = 10*kg + 6.25*BOY - 5*yas + 5;
+  var tdee = bmr * akt;
+  var kcal = Math.round((tdee + fazla)/25)*25;
+  var bakim = Math.round(tdee/25)*25;
+
+  var cut = fazla < 0;
+  var pro = Math.round(kg * (cut ? 2.4 : 2.0));
+  var yag = Math.round(kcal * 0.25 / 9);
+  var karb = Math.round((kcal - pro*4 - yag*9) / 4);
+
+  document.getElementById('kcal').textContent = kcal;
+  document.getElementById('pro').textContent  = pro + ' g';
+  document.getElementById('yag').textContent  = yag + ' g';
+  document.getElementById('karb').textContent = karb + ' g';
+
+  var msg;
+  if(fazla >= 400)      msg = 'Beklenen: haftada +0.25–0.35 kg. Bakım ≈ ' + bakim + ' kcal.';
+  else if(fazla >= 250) msg = 'Beklenen: haftada +0.15–0.20 kg. Bakım ≈ ' + bakim + ' kcal.';
+  else if(fazla > 0)    msg = 'Beklenen: haftada +0.05–0.10 kg. Bakım ≈ ' + bakim + ' kcal.';
+  else if(fazla === 0)  msg = 'Kilo sabit kalmalı. Rekompozisyon dönemi.';
+  else                  msg = 'Beklenen: haftada −0.5 kg. Süre 6–8 haftayı geçmesin.';
+  document.getElementById('rate').textContent = msg;
+}
+['kg','yas','akt','hedef'].forEach(function(id){
+  var el = document.getElementById(id);
+  el.addEventListener('input', hesaplaKalori);
+  el.addEventListener('change', hesaplaKalori);
+});
+hesaplaKalori();
+
+function yuvarla(x){ return (Math.round(x/2.5)*2.5).toFixed(1).replace('.0','') + ' kg'; }
+function hesaplaRM(){
+  var w = parseFloat(document.getElementById('w').value) || 0;
+  var r = parseFloat(document.getElementById('r').value) || 1;
+  var orm = w * (1 + r/30);
+  document.getElementById('orm').textContent = Math.round(orm);
+  document.getElementById('s85').textContent = yuvarla(orm*0.85);
+  document.getElementById('s80').textContent = yuvarla(orm*0.80);
+  document.getElementById('s70').textContent = yuvarla(orm*0.70);
+  document.getElementById('s60').textContent = yuvarla(orm*0.60);
+  document.getElementById('s55').textContent = yuvarla(orm*0.55);
+}
+['w','r'].forEach(function(id){
+  var el = document.getElementById(id);
+  el.addEventListener('input', hesaplaRM);
+  el.addEventListener('change', hesaplaRM);
+});
+hesaplaRM();
+</script>
+</body>
+</html>
